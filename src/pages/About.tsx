@@ -7,25 +7,11 @@ export const About = () => {
   const timeline = [
     {
       year: '2024 - Present',
-      title: 'Senior DevOps Engineer',
-      company: 'CloudTech Solutions',
-      description: 'Leading infrastructure automation and CI/CD pipeline optimization.',
-      icon: Code,
-    },
-    {
-      year: '2022 - 2024',
-      title: 'Full-Stack Developer',
-      company: 'StartupHub',
-      description: 'Built scalable web applications using React, Node.js, and cloud services.',
-      icon: Code,
-    },
-    {
-      year: '2021 - 2022',
-      title: 'Junior Developer',
-      company: 'TechCorp',
-      description: 'Developed REST APIs and microservices with modern JavaScript frameworks.',
-      icon: Code,
-    },
+      title: 'Freelance DevOps & Cloud Engineer',
+      company: 'Self-Employed',
+      description:
+        'Working on freelance projects focusing on cloud automation, CI/CD, and container orchestration using AWS, Docker, and Kubernetes.',
+      icon: Code,},
     {
       year: '2020 - 2021',
       title: 'Computer Science Graduate',
@@ -81,7 +67,7 @@ export const About = () => {
                 </div>
                 <div className="space-y-4 text-neutral-200 leading-relaxed">
                   <Typewriter
-                    text="Hello, I'm Neeraj Nakka, and I turn code into production reality."
+                    text="Hello, I'm Neeraj Chandra Nakka, and I turn code into production reality."
                     delay={30}
                     className="text-primary-500 font-semibold block mb-4"
                   />
@@ -94,7 +80,7 @@ export const About = () => {
                     where I now focus on crafting scalable infrastructure, clean CI/CD pipelines, and resilient deployments.
                   </p>
                   <p>
-                    I work across AWS and OCI, orchestrate containers with Docker and Kubernetes, 
+                    I work across AWS and Azure, orchestrate containers with Docker and Kubernetes, 
                     and define infrastructure with Terraform and automation scripts. Behind the command line, 
                     I'm equally comfortable in version control and workflow automation, using Git, GitHub, 
                     and GitLab CI/CD to bridge collaboration and delivery.
@@ -122,19 +108,19 @@ export const About = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Experience</span>
-                    <span className="text-primary-500 font-mono">5+ years</span>
+                    <span className="text-primary-500 font-mono">1+ years</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Cloud Platforms</span>
-                    <span className="text-primary-500 font-mono">AWS, OCI</span>
+                    <span className="text-primary-500 font-mono">AWS, Azure</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Projects</span>
-                    <span className="text-primary-500 font-mono">7 deployed</span>
+                    <span className="text-primary-500 font-mono">7+ deployed</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Technologies</span>
-                    <span className="text-primary-500 font-mono">19 mastered</span>
+                    <span className="text-primary-500 font-mono">19+ mastered</span>
                   </div>
                 </div>
               </div>
