@@ -1,0 +1,3 @@
+- Provide example commands for building and deploying
+- List the main files in the project and their purposes
+- Explain how to customize the portfolio content
