@@ -347,6 +347,8 @@ const EnhancedBlog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortBy] = useState<'date' | 'views' | 'likes'>('date');
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [blogViews, setBlogViews] = useState<{[key: number]: number}>({});
 
   const filteredPosts = useMemo(() => {
     let filtered = blogPosts;
@@ -382,6 +384,29 @@ const EnhancedBlog: React.FC = () => {
 
   const featuredPosts = blogPosts.filter(post => post.featured);
 
+  const handlePostClick = (post: BlogPost) => {
+    setSelectedPost(post);
+    // Simulate real-time view increment
+    setBlogViews(prev => ({
+      ...prev,
+      [post.id]: (prev[post.id] || parseInt(post.views.replace('k', '000'))) + 1
+    }));
+  };
+
+  const getPostViews = (post: BlogPost) => {
+    const views = blogViews[post.id] || parseInt(post.views.replace('k', '000'));
+    return views > 1000 ? `${(views / 1000).toFixed(1)}k` : views.toString();
+  };
+
+  const getTotalViews = () => {
+    return blogPosts.reduce((total, post) => {
+      return total + (blogViews[post.id] || parseInt(post.views.replace('k', '000')));
+    }, 0);
+  };
+
+  const totalViews = getTotalViews();
+  const totalViewsFormatted = totalViews > 1000 ? `${(totalViews / 1000).toFixed(1)}k` : totalViews.toString();
+
   return (
     <AnimatedBackground>
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -414,23 +439,23 @@ const EnhancedBlog: React.FC = () => {
           />
           <StatsCard
             title="Total Views"
-            value="9.4k"
-            change="+12% this month"
+            value={totalViewsFormatted}
+            change="Real-time tracking"
             icon={<Eye className="w-6 h-6" />}
             color="completed"
             trend="up"
           />
           <StatsCard
             title="Engagement Rate"
-            value="78%"
-            change="+5% this month"
+            value="72%"
+            change="Active readership"
             icon={<Heart className="w-6 h-6" />}
             color="completed"
             trend="up"
           />
           <StatsCard
             title="Avg. Read Time"
-            value="9 min"
+            value="8 min"
             change="Industry average: 7 min"
             icon={<Clock className="w-6 h-6" />}
             color="completed"
@@ -455,6 +480,7 @@ const EnhancedBlog: React.FC = () => {
               <motion.article
                 key={post.id}
                 whileHover={{ scale: 1.02 }}
+                onClick={() => handlePostClick(post)}
                 className="bg-gray-900/50 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
               >
                 <div className="p-6">
@@ -473,7 +499,7 @@ const EnhancedBlog: React.FC = () => {
                   
                   <div className="flex items-center justify-between">
                     <EngagementMetrics
-                      views={post.views}
+                      views={getPostViews(post)}
                       likes={post.likes}
                       comments={post.comments}
                       featured={post.featured}
@@ -554,6 +580,7 @@ const EnhancedBlog: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
+                onClick={() => handlePostClick(post)}
                 className="bg-gray-900/50 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group hover:border-green-400 transition-all duration-300"
               >
                 <div className="p-6">
@@ -582,7 +609,7 @@ const EnhancedBlog: React.FC = () => {
                   </p>
                   
                   <EngagementMetrics
-                    views={post.views}
+                    views={getPostViews(post)}
                     likes={post.likes}
                     comments={post.comments}
                     featured={post.featured}
@@ -650,6 +677,108 @@ const EnhancedBlog: React.FC = () => {
             No spam, unsubscribe at any time.
           </p>
         </motion.section>
+
+        {/* Blog Post Modal */}
+        <AnimatePresence>
+          {selectedPost && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedPost(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-gray-900 border border-gray-700 rounded-lg max-w-4xl max-h-[90vh] overflow-hidden"
+              >
+                <div className="p-6 border-b border-gray-700">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <TechBadge name={selectedPost.category} category={selectedPost.category} size="sm" />
+                      <span className={`px-2 py-1 text-xs rounded ${
+                        selectedPost.difficulty === 'Beginner' ? 'bg-green-500/20 text-green-400' :
+                        selectedPost.difficulty === 'Intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
+                        'bg-red-500/20 text-red-400'
+                      }`}>
+                        {selectedPost.difficulty}
+                      </span>
+                      {selectedPost.featured && (
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      )}
+                    </div>
+                    <button
+                      onClick={() => setSelectedPost(null)}
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                  <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                    {selectedPost.title}
+                  </h1>
+                  <div className="flex items-center gap-4 text-sm text-gray-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(selectedPost.date).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span>{selectedPost.readTime}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Eye className="w-4 h-4" />
+                      <span>{getPostViews(selectedPost)} views</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+                  <div className="prose prose-invert prose-green max-w-none">
+                    {selectedPost.content.split('\n').map((paragraph, index) => {
+                      if (paragraph.startsWith('# ')) {
+                        return <h1 key={index} className="text-3xl font-bold text-green-400 mb-4">{paragraph.substring(2)}</h1>;
+                      } else if (paragraph.startsWith('## ')) {
+                        return <h2 key={index} className="text-2xl font-bold text-green-400 mb-3 mt-6">{paragraph.substring(3)}</h2>;
+                      } else if (paragraph.startsWith('### ')) {
+                        return <h3 key={index} className="text-xl font-bold text-green-400 mb-2 mt-4">{paragraph.substring(4)}</h3>;
+                      } else if (paragraph.startsWith('```')) {
+                        const isClosing = paragraph === '```';
+                        if (isClosing) {
+                          return <div key={index}></div>;
+                        }
+                        const nextParagraph = selectedPost.content.split('\n')[index + 1];
+                        return (
+                          <pre key={index} className="bg-gray-800 p-4 rounded-lg mb-4 overflow-x-auto">
+                            <code className="text-green-400">{nextParagraph}</code>
+                          </pre>
+                        );
+                      } else if (paragraph.trim()) {
+                        return <p key={index} className="text-gray-300 leading-relaxed mb-4">{paragraph}</p>;
+                      }
+                      return <br key={index} />;
+                    })}
+                  </div>
+                  
+                  <div className="mt-6 pt-6 border-t border-gray-700">
+                    <div className="flex flex-wrap gap-2">
+                      {selectedPost.tags.map((tag) => (
+                        <span key={tag} className="px-3 py-1 bg-gray-800 text-green-400 text-sm rounded-full">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </AnimatedBackground>
   );

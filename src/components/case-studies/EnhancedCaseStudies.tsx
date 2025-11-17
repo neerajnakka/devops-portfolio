@@ -95,10 +95,10 @@ const caseStudies: CaseStudy[] = [
     ],
     technologies: ["AWS EKS", "ArgoCD", "GitOps", "Kubernetes", "Docker", "Terraform", "GitHub Actions"],
     impactMetrics: {
-      deploymentTime: { before: "45 min", after: "5 min", improvement: "89%" },
-      cost: { before: "$8,000/mo", after: "$5,600/mo", reduction: "30%" },
-      availability: { uptime: "99.9%", improvement: "2.1%" },
-      scalability: { capacity: "10x", improvement: "1000%" }
+      deploymentTime: { before: "45 min", after: "8 min", improvement: "82%" },
+      cost: { before: "$2,400/mo", after: "$1,800/mo", reduction: "25%" },
+      availability: { uptime: "99.5%", improvement: "1.5%" },
+      scalability: { capacity: "5x", improvement: "500%" }
     },
     architecture: {
       components: ["EKS Cluster", "ArgoCD", "Application Pods", "Load Balancers", "Database", "Cache Layer"],
@@ -133,9 +133,9 @@ const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Node.js", "WebSocket", "Redis", "MongoDB", "React", "Socket.io", "AWS"],
     impactMetrics: {
-      performance: { improvement: "150%" },
-      scalability: { capacity: "10,000+ users", improvement: "500%" },
-      availability: { uptime: "99.8%", improvement: "1.8%" }
+      performance: { improvement: "80%" },
+      scalability: { capacity: "500+ users", improvement: "300%" },
+      availability: { uptime: "99.2%", improvement: "1.2%" }
     },
     architecture: {
       components: ["WebSocket Server", "Redis Cluster", "MongoDB", "React Client", "CDN", "Load Balancer"],
@@ -170,9 +170,9 @@ const caseStudies: CaseStudy[] = [
     ],
     technologies: ["Terraform", "AWS", "Azure", "GCP", "Ansible", "Jenkins", "ELK Stack"],
     impactMetrics: {
-      deploymentTime: { before: "4 hours", after: "1 hour", improvement: "75%" },
-      cost: { before: "$15,000/mo", after: "$8,250/mo", reduction: "45%" },
-      performance: { improvement: "200%" }
+      deploymentTime: { before: "4 hours", after: "45 min", improvement: "81%" },
+      cost: { before: "$3,200/mo", after: "$2,400/mo", reduction: "25%" },
+      performance: { improvement: "120%" }
     },
     architecture: {
       components: ["Terraform Modules", "CI/CD Pipeline", "Security Scanning", "Monitoring", "Backup System"],
@@ -227,7 +227,7 @@ const EnhancedCaseStudies: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
         >
           <StatsCard
             title="Projects Completed"
@@ -236,16 +236,8 @@ const EnhancedCaseStudies: React.FC = () => {
             color="completed"
           />
           <StatsCard
-            title="Avg. Deployment Time"
-            value="2 hours"
-            change="-80% improvement"
-            icon={<Zap className="w-6 h-6" />}
-            color="completed"
-            trend="up"
-          />
-          <StatsCard
             title="Cost Savings"
-            value="38%"
+            value="35%"
             change="Average across projects"
             icon={<TrendingUp className="w-6 h-6" />}
             color="completed"
@@ -253,8 +245,8 @@ const EnhancedCaseStudies: React.FC = () => {
           />
           <StatsCard
             title="Uptime Achieved"
-            value="99.8%"
-            change="Industry-leading reliability"
+            value="99.5%"
+            change="Production reliability"
             icon={<Target className="w-6 h-6" />}
             color="completed"
             trend="up"
