@@ -496,7 +496,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </h4>
                               </div>
                               
-                              {key === 'deploymentTime' && metrics.before && metrics.after && (
+                              {key === 'deploymentTime' && metrics && 'before' in metrics && 'after' in metrics && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Before</span>
@@ -513,7 +513,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </div>
                               )}
 
-                              {key === 'cost' && metrics.before && metrics.after && (
+                              {key === 'cost' && metrics && 'before' in metrics && 'after' in metrics && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Before</span>
@@ -530,7 +530,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </div>
                               )}
 
-                              {key === 'availability' && metrics.uptime && (
+                              {key === 'availability' && metrics && 'uptime' in metrics && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Uptime</span>
@@ -543,7 +543,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </div>
                               )}
 
-                              {key === 'scalability' && metrics.capacity && (
+                              {key === 'scalability' && metrics && 'capacity' in metrics && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Capacity</span>
@@ -556,7 +556,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </div>
                               )}
 
-                              {key === 'performance' && (
+                              {key === 'performance' && metrics && 'improvement' in metrics && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Performance Gain</span>
