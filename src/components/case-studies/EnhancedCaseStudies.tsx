@@ -496,36 +496,36 @@ const EnhancedCaseStudies: React.FC = () => {
                                 </h4>
                               </div>
                               
-                              {key === 'deploymentTime' && metrics && 'before' in metrics && 'after' in metrics && (
+                              {key === 'deploymentTime' && metrics && (metrics as any).before && (metrics as any).after && (metrics as any).improvement && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Before</span>
-                                    <span className="text-red-400">{metrics.before}</span>
+                                    <span className="text-red-400">{(metrics as any).before}</span>
                                   </div>
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">After</span>
-                                    <span className="text-green-400">{metrics.after}</span>
+                                    <span className="text-green-400">{(metrics as any).after}</span>
                                   </div>
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Improvement</span>
-                                    <span className="text-green-400">-{metrics.improvement}</span>
+                                    <span className="text-green-400">-{(metrics as any).improvement}</span>
                                   </div>
                                 </div>
                               )}
 
-                              {key === 'cost' && metrics && 'before' in metrics && 'after' in metrics && (
+                              {key === 'cost' && metrics && (metrics as any).before && (metrics as any).after && (metrics as any).reduction && (
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Before</span>
-                                    <span className="text-red-400">{metrics.before}</span>
+                                    <span className="text-red-400">{(metrics as any).before}</span>
                                   </div>
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">After</span>
-                                    <span className="text-green-400">{metrics.after}</span>
+                                    <span className="text-green-400">{(metrics as any).after}</span>
                                   </div>
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Reduction</span>
-                                    <span className="text-green-400">-{metrics.reduction}</span>
+                                    <span className="text-green-400">-{(metrics as any).reduction}</span>
                                   </div>
                                 </div>
                               )}
@@ -534,11 +534,11 @@ const EnhancedCaseStudies: React.FC = () => {
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Uptime</span>
-                                    <span className="text-green-400">{metrics.uptime}</span>
+                                    <span className="text-green-400">{(metrics as any).uptime}</span>
                                   </div>
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Improvement</span>
-                                    <span className="text-green-400">+{metrics.improvement}</span>
+                                    <span className="text-green-400">+{(metrics as any).improvement}</span>
                                   </div>
                                 </div>
                               )}
@@ -547,11 +547,11 @@ const EnhancedCaseStudies: React.FC = () => {
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Capacity</span>
-                                    <span className="text-green-400">{metrics.capacity}</span>
+                                    <span className="text-green-400">{(metrics as any).capacity}</span>
                                   </div>
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Improvement</span>
-                                    <span className="text-green-400">+{metrics.improvement}</span>
+                                    <span className="text-green-400">+{(metrics as any).improvement}</span>
                                   </div>
                                 </div>
                               )}
@@ -560,7 +560,7 @@ const EnhancedCaseStudies: React.FC = () => {
                                 <div className="space-y-2">
                                   <div className="flex justify-between text-sm font-bold">
                                     <span className="text-gray-400">Performance Gain</span>
-                                    <span className="text-green-400">+{metrics.improvement}</span>
+                                    <span className="text-green-400">+{(metrics as any).improvement}</span>
                                   </div>
                                 </div>
                               )}
